@@ -31,9 +31,16 @@ jobs:
         run: npx tsc --noEmit || echo "⚠️ TS check skipped"
         continue-on-error: true
       
+      - name: Run tests
+        run: npm test -- --run
+      
       - name: Build test
         run: npm run build
       
-      - name: Build success notification
+      - name: Summary
         if: success()
-        run: echo "✅ Build successful"
+        run: |
+          echo "✅ CI 全部通过！"
+          echo "- 代码检查: 完成"
+          echo "- 单元测试: 通过"
+          echo "- 构建测试: 通过"
